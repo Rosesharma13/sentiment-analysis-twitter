@@ -47,16 +47,18 @@ Sentiment Label: Positive / Negative / Neutral
 ## 📸 Screenshots
 
 ### Sentiment Distribution
-![Sentiment Distribution](screenshots/sentiment_distribution.png)
+<img width="1692" height="741" alt="sentiment_distribution" src="https://github.com/user-attachments/assets/be702589-3cf0-4d66-8e7d-c45755557eac" />
 
 ### TextBlob vs Actual Labels
-![TextBlob Comparison](screenshots/textblob_comparison.png)
+<img width="1184" height="731" alt="textblob_comparison" src="https://github.com/user-attachments/assets/2fbbe68a-48fc-4586-997c-5551d2e168f8" />
+
 
 ### Model Accuracy Comparison
-![Model Comparison](screenshots/model_comparison.png)
+<img width="1184" height="733" alt="model_comparison" src="https://github.com/user-attachments/assets/0c889570-387f-4dd1-a637-bbeacb56bf36" />
+
 
 ### Confusion Matrix
-![Confusion Matrix](screenshots/confusion_matrix.png)
+<img width="976" height="731" alt="confusion_matrix" src="https://github.com/user-attachments/assets/28616a2e-61c6-492d-ad8d-279ac4fddf67" />
 
 ---
 
