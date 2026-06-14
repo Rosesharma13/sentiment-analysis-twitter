@@ -1,7 +1,5 @@
 # 💬 Sentiment Analysis on Twitter Data
 
-## Codec Technologies AI Internship Project
-
 [![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)](https://python.org)
 [![NLTK](https://img.shields.io/badge/NLTK-4A9B6F?style=flat)](https://nltk.org)
 [![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat&logo=scikit-learn&logoColor=white)](https://scikit-learn.org)
@@ -123,7 +121,7 @@ python sentiment_analysis.py
 
 ## 👩‍💻 Author
 
-**Rose Sharma** | Codec Technologies AI Internship
+**Rose Sharma** 
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rose-sharma13)
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/Rosesharma13)
