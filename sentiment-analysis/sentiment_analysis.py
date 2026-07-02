@@ -14,8 +14,8 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
 import re
-import os
 import warnings
+from pathlib import Path
 warnings.filterwarnings('ignore')
 
 from textblob import TextBlob
@@ -38,8 +38,12 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
 np.random.seed(42)
-os.makedirs('screenshots', exist_ok=True)
-os.makedirs('data', exist_ok=True)
+
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / 'data'
+SCREENSHOTS_DIR = BASE_DIR / 'screenshots'
+DATA_DIR.mkdir(exist_ok=True)
+SCREENSHOTS_DIR.mkdir(exist_ok=True)
 
 PALETTE = ["#1a3c6e", "#e74c3c", "#27ae60"]
 
@@ -171,7 +175,7 @@ def get_textblob_sentiment(text):
 # ─── Plotting ─────────────────────────────────────────────────────
 def plot_sentiment_distribution(df):
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-    fig.suptitle('Sentiment Analysis — Overview', fontsize=14, fontweight='bold')
+    fig.suptitle('Sentiment Analysis - Overview', fontsize=14, fontweight='bold')
 
     counts = df['sentiment'].value_counts()
     axes[0].pie(counts, labels=counts.index, autopct='%1.1f%%',
@@ -186,7 +190,7 @@ def plot_sentiment_distribution(df):
     axes[1].spines[['top','right']].set_visible(False)
 
     plt.tight_layout()
-    plt.savefig('screenshots/sentiment_distribution.png', dpi=150, bbox_inches='tight')
+    plt.savefig(SCREENSHOTS_DIR / 'sentiment_distribution.png', dpi=150, bbox_inches='tight')
     plt.close()
     print("✅ Distribution chart saved")
 
@@ -205,7 +209,7 @@ def plot_model_comparison(results):
         ax.text(bar.get_x()+bar.get_width()/2, bar.get_height()+0.005,
                 f'{bar.get_height():.3f}', ha='center', fontweight='bold')
     plt.tight_layout()
-    plt.savefig('screenshots/model_comparison.png', dpi=150, bbox_inches='tight')
+    plt.savefig(SCREENSHOTS_DIR / 'model_comparison.png', dpi=150, bbox_inches='tight')
     plt.close()
     print("✅ Model comparison saved")
 
@@ -214,11 +218,11 @@ def plot_confusion_matrix(cm, model_name, labels):
     fig, ax = plt.subplots(figsize=(7, 5))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', ax=ax,
                 xticklabels=labels, yticklabels=labels)
-    ax.set_title(f'Confusion Matrix — {model_name}', fontweight='bold')
+    ax.set_title(f'Confusion Matrix - {model_name}', fontweight='bold')
     ax.set_ylabel('Actual')
     ax.set_xlabel('Predicted')
     plt.tight_layout()
-    plt.savefig('screenshots/confusion_matrix.png', dpi=150, bbox_inches='tight')
+    plt.savefig(SCREENSHOTS_DIR / 'confusion_matrix.png', dpi=150, bbox_inches='tight')
     plt.close()
     print("✅ Confusion matrix saved")
 
@@ -236,7 +240,7 @@ def plot_textblob_vs_actual(df):
     ax.legend(title='TextBlob Prediction')
     ax.spines[['top','right']].set_visible(False)
     plt.tight_layout()
-    plt.savefig('screenshots/textblob_comparison.png', dpi=150, bbox_inches='tight')
+    plt.savefig(SCREENSHOTS_DIR / 'textblob_comparison.png', dpi=150, bbox_inches='tight')
     plt.close()
     print("✅ TextBlob comparison saved")
     return match
@@ -245,13 +249,13 @@ def plot_textblob_vs_actual(df):
 # ─── Main ─────────────────────────────────────────────────────────
 if __name__ == "__main__":
     print("=" * 55)
-    print("SENTIMENT ANALYSIS — Codec Technologies")
+    print("SENTIMENT ANALYSIS - Codec Technologies")
     print("=" * 55)
 
     # Generate data
     print("\n📊 Generating tweet dataset...")
     df = generate_dataset(3000)
-    df.to_csv('data/tweets.csv', index=False)
+    df.to_csv(DATA_DIR / 'tweets.csv', index=False)
     print(f"✅ Dataset: {len(df):,} tweets")
     print(df['sentiment'].value_counts().to_string())
 
@@ -322,5 +326,5 @@ if __name__ == "__main__":
         print(f"  TextBlob: {tb} | SVM: {ml}\n")
 
     print("=" * 55)
-    print(f"✅ COMPLETE — Best: {best_name} | Acc: {ml_results[best_name]:.3f}")
+    print(f"✅ COMPLETE - Best: {best_name} | Acc: {ml_results[best_name]:.3f}")
     print("=" * 55)
