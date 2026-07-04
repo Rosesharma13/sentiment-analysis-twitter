@@ -26,6 +26,7 @@ from sklearn.svm import LinearSVC
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from sklearn.pipeline import Pipeline
 import nltk
+from xquik_export import load_xquik_export
 
 # Download required NLTK data
 for pkg in ['stopwords', 'punkt', 'wordnet']:
@@ -295,6 +296,16 @@ if __name__ == "__main__":
     svm_acc = accuracy_score(y_test, svm_pred)
     ml_results['SVM'] = svm_acc
     print(f"  SVM accuracy:        {svm_acc:.3f}")
+
+    xquik_export_path = os.getenv("XQUIK_EXPORT_PATH", "").strip()
+    if xquik_export_path:
+        xquik_df = pd.DataFrame(load_xquik_export(xquik_export_path))
+        xquik_df["clean_tweet"] = xquik_df["tweet"].apply(clean_tweet)
+        xquik_df["textblob_sentiment"] = xquik_df["tweet"].apply(get_textblob_sentiment)
+        xquik_df["svm_sentiment"] = svm_pipeline.predict(xquik_df["clean_tweet"])
+        output_path = os.getenv("XQUIK_OUTPUT_PATH", "data/xquik_predictions.csv")
+        xquik_df.to_csv(output_path, index=False)
+        print(f"  Xquik predictions saved: {output_path}")
 
     # Best model
     best_name = max(ml_results, key=ml_results.get)

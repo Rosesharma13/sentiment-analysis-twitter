@@ -80,10 +80,21 @@ sentiment-analysis/
 
 ```bash
 git clone https://github.com/Rosesharma13/sentiment-analysis-twitter.git
-cd sentiment-analysis-twitter
+cd sentiment-analysis-twitter/sentiment-analysis
 pip install -r requirements.txt
 python sentiment_analysis.py
 ```
+
+To score a Xquik tweet export with the trained SVM pipeline, set the export path
+before running the script:
+
+```bash
+XQUIK_EXPORT_PATH=exports/tweets.json python sentiment_analysis.py
+```
+
+Supported export formats are JSON, JSONL, and CSV. Predictions are written to
+`data/xquik_predictions.csv` by default. Set `XQUIK_OUTPUT_PATH` to choose a
+different output file.
 
 ---
 
